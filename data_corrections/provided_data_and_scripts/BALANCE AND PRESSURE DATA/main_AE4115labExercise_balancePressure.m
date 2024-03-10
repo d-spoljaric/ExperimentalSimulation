@@ -24,17 +24,17 @@ diskPath = './DATA';
 % structure and these must start with a letter, so you will need to replace
 % the first character with a letter. For the + and - signs this has already
 % been implemented.
-fn_BAL = {'TAILOFF/raw_tailOff_beta0.txt'};
+fn_BAL = {'BAL/raw_proponzerodef.txt'};
 
 % filename(s) of the zero-measurement (tare) data files. Define an entry
 % per raw data files. In case multiple zero-measurements are available for
 % a datapoint, then add a structure with the filenames of the zero 
 % measurements at the index of that datapoint.
-fn0 = {'TAILOFF/zer_ 20190526-124742.txt'}; 
+fn0 = {'BAL/zer_ 20220216-085611.txt'}; 
    
 % filenames of the pressure data files (same comments apply as for balance 
 % data files)
-fn_PRS = {'PRESSURE/raw_propoff_zeromeasurements.txt'};
+fn_PRS = {'PRESSURE/raw_propon_zerodef.txt'};
    
 % wing geometry
 b     = 1.4*cosd(4); % span [m]
@@ -67,9 +67,7 @@ BAL = BAL_process(diskPath,fn_BAL,fn0,idxB,D,S,b,c,XmRefB,XmRefM,dAoA,dAoS,model
 
 % example of how to access balance data (adapt the names of the fields of
 % the structure to your data)
-%figure
-%plot(BAL.windOn.tailOff_beta0_V50_balance.AoA, BAL.windOn.tailOff_beta0_V50_balance.CL, "*b")
+figure
+plot(BAL.windOn.proponzerodef.AoA,BAL.windOn.proponzerodef.CL,'*b')
 
-writematrix(BAL.windOn.tailOff_beta0_V50_balance.AoA, "unc_tailOff_alpha");
-writematrix(BAL.windOn.tailOff_beta0_V50_balance.CL, "unc_tailOff_CL");
 
