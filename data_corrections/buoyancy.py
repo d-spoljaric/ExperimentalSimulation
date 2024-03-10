@@ -12,4 +12,3 @@ lambda_3D_nacelle: float = 3.21206
 
 def calc_buoyancy_drag(shape_factor: float, t: float, dpdx: float) -> float:
     return -(np.pi/4)*shape_factor*(t**3)*dpdx
-:
