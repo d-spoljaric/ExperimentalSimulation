@@ -5,6 +5,7 @@ taper_ratio: float = 0.4  # Wing taper ratio
 bw: float = 1.397  # [m]
 B: float = 1.29 * bw
 H: float = 0.89 * bw
+S: float = 0.2172
 C: float = 2.9
 c_bar: float = 0.165
 
