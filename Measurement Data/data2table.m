@@ -1,0 +1,4 @@
+function tab = data2table(data)
+tab = table(          data.run, data.AoA, data.AoS, data.dPb, data.pBar, data.pInf, data.temp, data.nu, data.rpmWT, data.rho, data.q, data.V, data.Re, data.FX, data.FY, data.FZ, data.MX, data.MY, data.MZ, data.CFX, data.CFY, data.CFZ, data.CN, data.CT, data.CY, data.CL, data.CD, data.CYaw, data.CMroll, data.CMpitch, data.CMpitch25c, data.CMyaw, ...
+    'VariableNames',     {'run',    'AoA',    'AoS',    'dPb',    'pBar',    'pInf',    'temp',    'nu',    'rpmWT',    'rho',    'q',    'V',    'Re',    'FX',    'FY',    'FZ',    'MX',    'MY',    'MZ',    'CFX',    'CFY',    'CFZ',    'CN',    'CT',    'CY',    'CL',    'CD',    'CYaw',    'CMroll',    'CMpitch',    'CMpitch25c',    'CMyaw'});
+end
