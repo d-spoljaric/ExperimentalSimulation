@@ -1,5 +1,6 @@
 function plotterThrust(Data,Vinf,J,Coeff,Angle,HoldAngleList)
 
+
 if Angle == "AoA"
     HoldAngle = "AoS";
 elseif Angle == "AoS"
