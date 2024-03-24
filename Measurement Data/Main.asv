@@ -49,19 +49,46 @@ AngleList.AoS.Thrust.Vinf20.J20 = unique(Data.Thrust.Vinf20.J20.AoS);
 AngleList.AoS.Thrust.Vinf20.J16 = unique(Data.Thrust.Vinf20.J16.AoS);
 
 %% Derivatives
-CLalphaCalc("Thrust","Vinf20","J16")
-CLalphaCalc("Thrust","Vinf20","J20")
-CLalphaCalc("Thrust","Vinf40","J16")
-CLalphaCalc("Thrust","Vinf40","J20")
+% CL_alpha = gradient(Data.Thrust.Vinf20.J16.CL, deg2rad(Data.Thrust.Vinf20.J16.AoA))
+% AoSList = [-4 0 3 7 10];
+% for i = 1:length(AoSList)
+%     DataAoSOrdered.Thrust.Vinf40.J16.(append("AoS",num2str(i))) = Data.Thrust.Vinf40.J16(Data.Thrust.Vinf40.J16.AoS == AoSList(i),:);
+% %     DataAoSOrdered.Thrust.Vinf40.J16.(append("AoS",num2str(i))) = sortrows(DataAoSOrdered.Thrust.Vinf40.J16.(append("AoS",num2str(i))),'AoA');
+%     DataAoSOrdered.Thrust.Vinf40.J16.(append("AoS",num2str(i))).CLalpha = gradient(DataAoSOrdered.Thrust.Vinf40.J16.(append("AoS",num2str(i))).CL, deg2rad(DataAoSOrdered.Thrust.Vinf40.J16.(append("AoS",num2str(i))).AoA));
+%     for j = 1:25
+%         for k = 1:length(AoSList)
+%             if AoSList(i) == Data.Thrust.Vinf40.J16.AoS(j) && DataAoSOrdered.Thrust.Vinf40.J16.(append("AoS",num2str(i))).AoA(k) == Data.Thrust.Vinf40.J16.AoA(j)
+%                 Data.Thrust.Vinf40.J16.CLalpha(j) = DataAoSOrdered.Thrust.Vinf40.J16.(append("AoS",num2str(i))).CLalpha(k)
+%             end
+%         end
+%     end
+% end
 
-CMalphaCalc("Thrust","Vinf20","J16")
-CMalphaCalc("Thrust","Vinf20","J20")
-CMalphaCalc("Thrust","Vinf40","J16")
-CMalphaCalc("Thrust","Vinf40","J20")
+% CLalphaCalc("Thrust","Vinf20","J16")
+% CLalphaCalc("Thrust","Vinf20","J20")
+% CLalphaCalc("Thrust","Vinf40","J16")
+% CLalphaCalc("Thrust","Vinf40","J20")
+
+ThrustOrWindmill = 'Thrust'
+for i = 1:length(AoSList)
+    DataAoSOrdered.(ThrustOrWindmill).(Vinf).(J).(append("AoS",num2str(i))) = Data.(ThrustOrWindmill).(Vinf).(Vinf)(Data.(ThrustOrWindmill).(Vinf).(Vinf).AoS == AoSList(i),:);
+    DataAoSOrdered.(ThrustOrWindmill).(Vinf).(Vinf).(append("AoS",num2str(i))).CLalpha = gradient(DataAoSOrdered.(ThrustOrWindmill).(Vinf).(Vinf).(append("AoS",num2str(i))).CL, deg2rad(DataAoSOrdered.(ThrustOrWindmill).(Vinf).(Vinf).(append("AoS",num2str(i))).AoA));
+    for j = 1:25
+        for k = 1:length(AoSList)
+            if AoSList(i) == Data.(ThrustOrWindmill).(Vinf).(Vinf).AoS(j) && DataAoSOrdered.(ThrustOrWindmill).(Vinf).(Vinf).(append("AoS",num2str(i))).AoA(k) == Data.(ThrustOrWindmill).(Vinf).(Vinf).AoA(j)
+                Data.(ThrustOrWindmill).(Vinf).(Vinf).CLalpha(j) = DataAoSOrdered.(ThrustOrWindmill).(Vinf).(Vinf).(append("AoS",num2str(i))).CLalpha(k);
+            end
+        end
+    end
+end
+end
 
 
 
 
+
+
+% zz = polyfit(deg2rad(Data.Thrust.Vinf20.J16.AoA), Data.Thrust.Vinf20.J16.CL, 1)
 
 % figure
 % hold on
