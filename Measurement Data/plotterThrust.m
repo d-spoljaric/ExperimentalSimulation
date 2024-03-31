@@ -1,5 +1,16 @@
 function plotterThrust(Data,Vinf,J,Coeff,Angle,HoldAngleList)
 
+if Vinf == "Vinf20"
+    V = 20;
+elseif Vinf == "Vinf40"
+    V = 40;
+end
+
+if J == "J16"
+    J_ = 1.6;
+elseif J == "J20"
+    J_ = 2;
+end
 
 if Angle == "AoA"
     HoldAngle = "AoS";
@@ -25,5 +36,8 @@ end
 legend(lgd_list,'Interpreter','latex');
 xlabel(append("$",xlabelAngle,"\;[^\circ]$"),'Interpreter','latex')
 ylabel(Coeff,'Interpreter','latex')
+titleString = append("$V_{\infty} =",num2str(V),",\; J=",num2str(J_),"$");
+title(titleString,'Interpreter','latex')
+
 hold off
 box on
