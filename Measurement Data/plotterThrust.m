@@ -1,9 +1,9 @@
 function plotterThrust(Data,Vinf,J,Coeff,Angle,HoldAngleList)
 
 if Vinf == "Vinf20"
-    V = 20;
+    Re = "2.24\times 10^5";
 elseif Vinf == "Vinf40"
-    V = 40;
+    Re = "4.46\times 10^5";
 end
 
 if J == "J16"
@@ -22,7 +22,8 @@ hold on
 for i = 1:length(HoldAngleList.(HoldAngle).Thrust.(Vinf).(J))
     holdValue = HoldAngleList.(HoldAngle).Thrust.(Vinf).(J)(i);
     plot(Data.Thrust.(Vinf).(J)(Data.Thrust.(Vinf).(J).(HoldAngle) == holdValue,:).(Angle), ...
-         Data.Thrust.(Vinf).(J)(Data.Thrust.(Vinf).(J).(HoldAngle) == holdValue,:).(Coeff))
+         Data.Thrust.(Vinf).(J)(Data.Thrust.(Vinf).(J).(HoldAngle) == holdValue,:).(Coeff), ...
+         'LineWidth',0.7,'Marker','o')
     if Angle == "AoA"
         legendAngle = "\beta";
         xlabelAngle = "\alpha";
@@ -33,10 +34,10 @@ for i = 1:length(HoldAngleList.(HoldAngle).Thrust.(Vinf).(J))
     lgd_list{i} = strcat("$",legendAngle,"=", num2str(holdValue),"^\circ$");
 end
 
-legend(lgd_list,'Interpreter','latex');
+legend(lgd_list,'Interpreter','latex','Orientation','horizontal');
 xlabel(append("$",xlabelAngle,"\;[^\circ]$"),'Interpreter','latex')
 ylabel(Coeff,'Interpreter','latex')
-titleString = append("$V_{\infty} =",num2str(V),",\; J=",num2str(J_),"$");
+titleString = append("$Re_{\infty} =",num2str(Re),",\; J=",num2str(J_),"$");
 title(titleString,'Interpreter','latex')
 
 hold off

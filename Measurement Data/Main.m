@@ -1,14 +1,14 @@
 clc; clear all; close all;
 
-global Data Raw
+global Data Raw DataCorrected
 
 BAL = importdata("BAL.mat");
 PRS = importdata("PRS.mat");
 
-DataCorrected.Vinf20.J16 = readtable("corrected_data\thrust_v20_j16_corrected.csv");
-DataCorrected.Vinf20.J20 = readtable("corrected_data\thrust_v20_j20_corrected.csv");
-DataCorrected.Vinf40.J16 = readtable("corrected_data\thrust_v40_j16_corrected.csv");
-DataCorrected.Vinf40.J20 = readtable("corrected_data\thrust_v40_j20_corrected.csv");
+DataCorrected.Thrust.Vinf20.J16 = readtable("corrected_data\thrust_v20_j16_corrected.csv");
+DataCorrected.Thrust.Vinf20.J20 = readtable("corrected_data\thrust_v20_j20_corrected.csv");
+DataCorrected.Thrust.Vinf40.J16 = readtable("corrected_data\thrust_v40_j16_corrected.csv");
+DataCorrected.Thrust.Vinf40.J20 = readtable("corrected_data\thrust_v40_j20_corrected.csv");
 
 %%
 Raw.WindMilling = data2table(BAL.windOn.wind_on_27);
@@ -61,91 +61,114 @@ AngleList.AoS.Thrust.Vinf40.J20 = unique(Data.Thrust.Vinf40.J20.AoS);
 AngleList.AoS.Thrust.Vinf20.J20 = unique(Data.Thrust.Vinf20.J20.AoS);
 AngleList.AoS.Thrust.Vinf20.J16 = unique(Data.Thrust.Vinf20.J16.AoS);
 
+AngleListCorrected.AoA.Thrust.Vinf40.J16 = unique(DataCorrected.Thrust.Vinf40.J16.AoA);
+AngleListCorrected.AoA.Thrust.Vinf40.J20 = unique(DataCorrected.Thrust.Vinf40.J20.AoA);
+AngleListCorrected.AoA.Thrust.Vinf20.J20 = unique(DataCorrected.Thrust.Vinf20.J20.AoA);
+AngleListCorrected.AoA.Thrust.Vinf20.J16 = unique(DataCorrected.Thrust.Vinf20.J16.AoA);
+
+AngleListCorrected.AoS.Thrust.Vinf40.J16 = unique(DataCorrected.Thrust.Vinf40.J16.AoS);
+AngleListCorrected.AoS.Thrust.Vinf40.J20 = unique(DataCorrected.Thrust.Vinf40.J20.AoS);
+AngleListCorrected.AoS.Thrust.Vinf20.J20 = unique(DataCorrected.Thrust.Vinf20.J20.AoS);
+AngleListCorrected.AoS.Thrust.Vinf20.J16 = unique(DataCorrected.Thrust.Vinf20.J16.AoS);
+
 %% Derivatives
 
 % CL lift alpha
-derivativeCalc("Thrust","Vinf20","J16","CL","AoA")
-derivativeCalc("Thrust","Vinf20","J20","CL","AoA")
-derivativeCalc("Thrust","Vinf40","J16","CL","AoA")
-derivativeCalc("Thrust","Vinf40","J20","CL","AoA")
+derivativeCalc("Thrust","Vinf20","J16","CL","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CL","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CL","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CL","AoA",AngleListCorrected)
 
 % CM pitch alpha
-derivativeCalc("Thrust","Vinf20","J16","CMpitch","AoA")
-derivativeCalc("Thrust","Vinf20","J20","CMpitch","AoA")
-derivativeCalc("Thrust","Vinf40","J16","CMpitch","AoA")
-derivativeCalc("Thrust","Vinf40","J20","CMpitch","AoA")
+derivativeCalc("Thrust","Vinf20","J16","CMpitch","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CMpitch","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CMpitch","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CMpitch","AoA",AngleListCorrected)
 
 % CM pitch beta
-derivativeCalc("Thrust","Vinf20","J16","CMpitch","AoS")
-derivativeCalc("Thrust","Vinf20","J20","CMpitch","AoS")
-derivativeCalc("Thrust","Vinf40","J16","CMpitch","AoS")
-derivativeCalc("Thrust","Vinf40","J20","CMpitch","AoS")
+derivativeCalc("Thrust","Vinf20","J16","CMpitch","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CMpitch","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CMpitch","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CMpitch","AoS",AngleListCorrected)
 
 % CM yaw alpha
-derivativeCalc("Thrust","Vinf20","J16","CMyaw","AoA")
-derivativeCalc("Thrust","Vinf20","J20","CMyaw","AoA")
-derivativeCalc("Thrust","Vinf40","J16","CMyaw","AoA")
-derivativeCalc("Thrust","Vinf40","J20","CMyaw","AoA")
+derivativeCalc("Thrust","Vinf20","J16","CMyaw","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CMyaw","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CMyaw","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CMyaw","AoA",AngleListCorrected)
 
 % CM yaw beta
-derivativeCalc("Thrust","Vinf20","J16","CMyaw","AoS")
-derivativeCalc("Thrust","Vinf20","J20","CMyaw","AoS")
-derivativeCalc("Thrust","Vinf40","J16","CMyaw","AoS")
-derivativeCalc("Thrust","Vinf40","J20","CMyaw","AoS")
+derivativeCalc("Thrust","Vinf20","J16","CMyaw","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CMyaw","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CMyaw","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CMyaw","AoS",AngleListCorrected)
 
 % Cy (sideforce) alpha
-derivativeCalc("Thrust","Vinf20","J16","CY","AoA")
-derivativeCalc("Thrust","Vinf20","J20","CY","AoA")
-derivativeCalc("Thrust","Vinf40","J16","CY","AoA")
-derivativeCalc("Thrust","Vinf40","J20","CY","AoA")
+derivativeCalc("Thrust","Vinf20","J16","CY","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CY","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CY","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CY","AoA",AngleListCorrected)
 
 %Cy (sideforce) beta
-derivativeCalc("Thrust","Vinf20","J16","CY","AoS")
-derivativeCalc("Thrust","Vinf20","J20","CY","AoS")
-derivativeCalc("Thrust","Vinf40","J16","CY","AoS")
-derivativeCalc("Thrust","Vinf40","J20","CY","AoS")
+derivativeCalc("Thrust","Vinf20","J16","CY","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CY","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CY","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CY","AoS",AngleListCorrected)
 
 % CM roll alpha
-derivativeCalc("Thrust","Vinf20","J16","CMroll","AoA")
-derivativeCalc("Thrust","Vinf20","J20","CMroll","AoA")
-derivativeCalc("Thrust","Vinf40","J16","CMroll","AoA")
-derivativeCalc("Thrust","Vinf40","J20","CMroll","AoA")
+derivativeCalc("Thrust","Vinf20","J16","CMroll","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CMroll","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CMroll","AoA",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CMroll","AoA",AngleListCorrected)
 
 %CM roll beta
-derivativeCalc("Thrust","Vinf20","J16","CMroll","AoS")
-derivativeCalc("Thrust","Vinf20","J20","CMroll","AoS")
-derivativeCalc("Thrust","Vinf40","J16","CMroll","AoS")
-derivativeCalc("Thrust","Vinf40","J20","CMroll","AoS")
+derivativeCalc("Thrust","Vinf20","J16","CMroll","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf20","J20","CMroll","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J16","CMroll","AoS",AngleListCorrected)
+derivativeCalc("Thrust","Vinf40","J20","CMroll","AoS",AngleListCorrected)
 
 % CM yaw delta_r
-derivativeCalc("Derivative","Vinf20","J16","CMyaw","delta_r")
-derivativeCalc("Derivative","Vinf20","J20","CMyaw","delta_r")
-derivativeCalc("Derivative","Vinf40","J16","CMyaw","delta_r")
-derivativeCalc("Derivative","Vinf40","J20","CMyaw","delta_r")
+derivativeCalcDeri("Derivative","Vinf20","J16","CMyaw","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf20","J20","CMyaw","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf40","J16","CMyaw","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf40","J20","CMyaw","delta_r",AngleList)
 
 %Cy (sideforce) delta_r
-derivativeCalc("Derivative","Vinf20","J16","CY","delta_r")
-derivativeCalc("Derivative","Vinf20","J20","CY","delta_r")
-derivativeCalc("Derivative","Vinf40","J16","CY","delta_r")
-derivativeCalc("Derivative","Vinf40","J20","CY","delta_r")
+derivativeCalcDeri("Derivative","Vinf20","J16","CY","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf20","J20","CY","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf40","J16","CY","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf40","J20","CY","delta_r",AngleList)
 
 % CM roll delta_r
-derivativeCalc("Derivative","Vinf20","J16","CMroll","delta_r")
-derivativeCalc("Derivative","Vinf20","J20","CMroll","delta_r")
-derivativeCalc("Derivative","Vinf40","J16","CMroll","delta_r")
-derivativeCalc("Derivative","Vinf40","J20","CMroll","delta_r")
+derivativeCalcDeri("Derivative","Vinf20","J16","CMroll","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf20","J20","CMroll","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf40","J16","CMroll","delta_r",AngleList)
+derivativeCalcDeri("Derivative","Vinf40","J20","CMroll","delta_r",AngleList)
 
 %% Plots
+thrustGroupPlotter(DataCorrected,"CMyaw","AoA",AngleListCorrected) % CM yaw AoA
+thrustGroupPlotter(DataCorrected,"CMyaw","AoS",AngleListCorrected) % CM yaw AoS
+thrustGroupPlotter(DataCorrected,"CY","AoA",AngleListCorrected) % CY AoA
+thrustGroupPlotter(DataCorrected,"CY","AoS",AngleListCorrected) % CY AoS
+thrustGroupPlotter(DataCorrected,"CMroll","AoA",AngleListCorrected) % CMroll AoA
+thrustGroupPlotter(DataCorrected,"CMroll","AoS",AngleListCorrected) % CMroll AoS
+
+%%
+thrustGroupPlotter(DataCorrected,"CMyawAoS","AoS",AngleListCorrected) % CM yaw AoS
+thrustGroupPlotter(DataCorrected,"CYAoS","AoS",AngleListCorrected) % CY AoS
+thrustGroupPlotter(DataCorrected,"CMrollAoS","AoS",AngleListCorrected) % CMroll AoS
+%%
 figure()
-tiledlayout(2,2,"TileSpacing","compact")
-
+tiledlayout(2,3,'TileSpacing','tight')
 nexttile
-plotterThrust(Data,"Vinf20","J16","CL","AoS",AngleList)
+derivativeGroupPlotter(Data,"CMyaw")
 nexttile
-plotterThrust(Data,"Vinf20","J20","CL","AoS",AngleList)
+derivativeGroupPlotter(Data,"CMroll")
 nexttile
-plotterThrust(Data,"Vinf40","J16","CL","AoS",AngleList)
+derivativeGroupPlotter(Data,"CY")
 nexttile
-plotterThrust(Data,"Vinf40","J20","CL","AoS",AngleList)
-
-figure
+derivativeGroupPlotter(Data,"CMyawdelta_r")
+nexttile
+derivativeGroupPlotter(Data,"CMrolldelta_r")
+nexttile
+derivativeGroupPlotter(Data,"CYdelta_r")
